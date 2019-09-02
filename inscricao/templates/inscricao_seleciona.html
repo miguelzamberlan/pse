@@ -15,7 +15,7 @@
                     <label>
                         <input type="hidden" name="escolapublica" id="id_escolapublica"  {% if escolapublica %} value="True" {% endif %}>
                         {% if escolapublica %}
-                        <span>O candidato declarou que estudou sempre em Escola Pública! Selecione opção de renda e etnia:</span>
+                            <p>O candidato declarou que estudou sempre em <b>Escola Pública</b>! Selecione opção de renda e/ou etnia se for o caso:</p>
                         {% endif %}
                     </label>
                 </p>
@@ -42,7 +42,7 @@
                     </label>
                 </p>
                 <p>
-                    <label>Selecione o tipo de nota que o candidato irá fornecer</label>
+                    <p>Selecione o tipo de nota que o candidato irá fornecer</p>
                     <select name="opcao" id="opcao" class="browser-default">
                       <option value="1">Histórico Escolar do Ensino Fundamental</option>
                       <option value="2">Certificado de Conclusão via provão ou análogos</option>

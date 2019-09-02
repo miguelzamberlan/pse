@@ -7,6 +7,9 @@
             <form action="{% url 'inscricao:continuar' %}" method="post">
                 {% csrf_token %}
                 <p>
+                    Caso o aluno opte por concorrer a <b>vagas reservadas</b> escolha uma opção abaixo, caso contrário clique em "continuar" para seguir com <b>Ampla Concorrência</b>!
+                </p>
+                <p>
                     <label>
                         {{ form.escolapublica }}
                         <span>Estudou sempre em Escola Pública?</span>
