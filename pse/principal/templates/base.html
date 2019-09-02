@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+
+  <title>PSE IFRO - São Miguel do Guaporé</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Compiled and minified CSS -->
+  <link type="text/css" rel="stylesheet" media="screen,projection" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper container">
+      <a href="#!" class="brand-logo">PSE - IFRO</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+          <li><a href="{% url 'principal:principal' %}">Home</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'inscricao:inscricao' %}">Inscrição</a></li>
+          <li><a href="{% url 'inscricao:relatorio' %}">Relatório</a></li>
+          <li><a href="{% url 'logout' %}">{{ user.username }} (Sair)</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+      <li><a href="sass.html">Inscrição</a></li>
+      <li><a href="badges.html">Relatório</a></li>
+  </ul>
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <br><br><br>
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Instituto Federal de Rondônia</h5>
+          <p class="grey-text text-lighten-4">Este sistema foi desenvolvido exclusivamente para o processo seletivo simplificado do IFRO - Campus São Miguel do Guaporé. Informa-se que esta é uma ação local e não está vinculada ao IFRO.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Portal de Seleção IFRO</h5>
+          <ul>
+            <li><a class="white-text" href="https://selecao.ifro.edu.br">Acessar Portal</a></li>
+            <li><a class="white-text" href="https://selecao.ifro.edu.br/component/phocadownload/category/549-psu-2019-1-cursos-tecnicos-integrados-documentos?download=4777:simulador-de-renda">Simulador de Renda</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Desenvolvido por <a class="orange-text text-lighten-3" href="http://www.miguelzamberlan.com.br">Miguel Zamberlan</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+  <script type="text/javascript">
+    (function($){
+      $(function(){
+
+        $('.sidenav').sidenav();
+
+      }); // end of document ready
+    })(jQuery); // end of jQuery name space
+  </script>
+
+  </body>
+</html>

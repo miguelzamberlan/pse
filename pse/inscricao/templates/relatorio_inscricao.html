@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load materializecss %}
+
+{% block content %}
+    <div class="section no-pad-bot" id="index-banner">
+
+	        <h4>Relatório de Inscritos</h4>
+				<div role="main" class="container p-2 p-md-6">
+					<form action="." method="post">
+						{% csrf_token %}
+
+						<p>
+                            <label>Digite o Nome ou CPF do Candidato</label>
+                            <input type="text" name="p_filtro" id="p_filtro" />
+                        </p>
+
+						<input type="submit" class="btn btn-primary" value="Filtrar">
+					</form>
+				</div>
+
+			        <table class="responsive-table">
+				        <thead class="thead-dark">
+				            <tr>
+					            <th scope="col">Cod</th>
+					            <th scope="col">Nome Candidato</th>
+					            <th scope="col">CPF</th>
+					            <th scope="col">Data Nascimento</th>
+					            <th scope="col">Telefone</th>
+                                <th scope="col">Opção</th>
+                                <th scope="col">Média</th>
+								<th></th>
+				            </tr>
+				        </thead>
+				        <tbody>
+					        {% for registro in registros %}
+				            <tr class="small" >
+					            <td>{{ registro.id }} </td>
+					            <td>{{ registro.nomecandidato }}</td>
+					            <td>{{ registro.cpfcandidato }}</td>
+					            <td>{{ registro.datanascimento }}</td>
+					            <td>{{ registro.telefone }}</td>
+                                <td>{{ registro.opcaoinscricao }}</td>
+                                <td>{{ registro.media }}</td>
+								<td>
+                                    <a class="btn btn-secondary btn-sm" href="{% url 'inscricao:ficha' registro.id %}" >Ficha Inscrição</a>
+									<a class="btn btn-secondary btn-sm" href="{% url 'inscricao:editar' registro.id %}" >Editar</a>
+                                    <a class="waves-effect waves-light btn modal-trigger" onclick="excluir_registro( event );" href="{% url 'inscricao:apagar' registro.id %}">Apagar</a>
+								</td>
+				            </tr>
+				            {% endfor %}
+				        </tbody>
+					</table>
+    <br><br>
+					<div class="text-center">
+						<span class="step-links">
+							{% if registros.has_previous %}
+							<a class="btn btn-secondary btn-sm" href="?page={{ registros.previous_page_number }}"><i
+									class="fas fa-arrow-left"></i></a>
+							{% endif %}
+
+							<span class="btn btn-primary btn-sm">
+								{{ registros.number }} de {{ registros.paginator.num_pages }}
+							</span>
+
+							{% if registros.has_next %}
+							<a class="btn btn-secondary btn-sm" href="?page={{ registros.next_page_number }}"><i
+									class="fas fa-arrow-right"></i></a>
+							{% endif %}
+						</span>
+					</div>
+        </div>
+
+        <script type="text/javascript">
+        function excluir_registro( e ){
+            if( !confirm('Deseja realmente excluir este registro?') )
+            {
+                if( window.event)
+                    window.event.returnValue=false;
+                else
+                    e.preventDefault();
+            }
+        }
+
+        </script>
+
+{% endblock %}

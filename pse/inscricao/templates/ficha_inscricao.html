@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+        <title>Ficha Inscrição {{ codinscricao }}</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- Compiled and minified CSS -->
+        <link type="text/css" rel="stylesheet" media="screen,projection" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <style>
+            body {
+                background-color: #f7f7f7;
+            }
+        </style>
+    </head>
+    <body>
+        <h5 class="center">Instituto Federal de Educação, Ciência e Tecnologia de Rondônia</h5>
+        <h5 class="center"><i>Campus</i> Avançado São Miguel do Guaporé</h5>
+        <h6 class="center">Processo Seletivo Especial 2019/2</h6>
+        <h6 class="center">Ficha Inscrição nº {{ codinscricao }}</h6>
+        <table class="table">
+            <tr>
+                <th>Nome Candidato</th>
+                <td>{{ dados.nomecandidato }}</td>
+            </tr>
+           <tr>
+                <th>CPF Candidato</th>
+                <td>{{ dados.cpfcandidato }}</td>
+            </tr>
+           <tr>
+                <th>Data Nascimento</th>
+                <td>{{ dados.datanascimento }}</td>
+            </tr>
+           <tr>
+                <th>Endereço Completo</th>
+                <td>{{ dados.endereco }}</td>
+            </tr>
+           <tr>
+                <th>Bairro</th>
+                <td>{{ dados.endereco_bairro }}</td>
+            </tr>
+           <tr>
+                <th>Cidade / Estado</th>
+                <td>{{ dados.endereco_cidade }} / RO</td>
+            </tr>
+           <tr>
+                <th>E-mail</th>
+                <td>{{ dados.email }}</td>
+            </tr>
+           <tr>
+                <th>Documento de Identificação</th>
+                <td>{{ dados.docidentificacao }} - {{ dados.docidentificacao_emissor }}</td>
+            </tr>
+           <tr>
+                <th>Nome do Pai</th>
+                <td>{{ dados.nomepai }}</td>
+            </tr>
+           <tr>
+                <th>Nome da Mãe</th>
+                <td>{{ dados.nomemae }}</td>
+            </tr>
+           <tr>
+                <th>Nome do Responsável</th>
+                <td>{{ dados.nomeresponsavel }}</td>
+            </tr>
+           <tr>
+                <th>CPF do Responsável</th>
+                <td>{{ dados.cpfresponsavel }}</td>
+            </tr>
+        </table>
+        <br>
+        <p>O candidato declara estar ciente que esta concorrendo a vagas como <b>{{ dados.opcaoinscricao }}</b> de acordo com a descrição do edital.</p>
+        <p>Declara ainda que as notas informadas para participar do processo seletivo são:</p>
+        {% if dados.em_7_portugues != 0 and dados.em_7_ciencias != 0 and dados.em_7_geografia != 0 and dados.em_7_matematica != 0 %}
+           <table class="table">
+                <tr>
+                    <th></th>
+                    <th>Portugês</th>
+                    <th>Matemática</th>
+                    <th>Geografia</th>
+                    <th>História</th>
+                    <th>Ciências</th>
+                </tr>
+               <tr>
+                    <td>7º</td>
+                    <td>{{ dados.em_7_portugues }}</td>
+                    <td>{{ dados.em_7_matematica }}</td>
+                    <td>{{ dados.em_7_geografia }}</td>
+                    <td>{{ dados.em_7_historia }}</td>
+                    <td>{{ dados.em_7_ciencias }}</td>
+                </tr>
+               <tr>
+                    <td>8º</td>
+                    <td>{{ dados.em_8_portugues }}</td>
+                    <td>{{ dados.em_8_matematica }}</td>
+                    <td>{{ dados.em_8_geografia }}</td>
+                    <td>{{ dados.em_8_historia }}</td>
+                    <td>{{ dados.em_8_ciencias }}</td>
+                </tr>
+               <tr>
+                    <td>9º</td>
+                    <td>{{ dados.em_9_portugues }}</td>
+                    <td>{{ dados.em_9_matematica }}</td>
+                    <td>{{ dados.em_9_geografia }}</td>
+                    <td>{{ dados.em_9_historia }}</td>
+                    <td>{{ dados.em_9_ciencias }}</td>
+                </tr>
+           </table>
+        {% endif %}
+
+        {% if dados.provao_ciencias != 0 and dados.provao_matematica != 0 and dados.provao_geografia != 0 %}
+            <p>Provão Português: {{ dados.provao_portugues }}</p>
+        {% endif %}
+
+        {% if dados.encceja_ciencias != 0 and dados.encceja_matematica != 0 and dados.encceja_portugues != 0 %}
+            <p>ENCCEJA Portugês: {{ dados.encceja_portugues }}</p>
+            <p>ENCCEJA Matemática: {{ dados.encceja_matematica }}</p>
+            <p>ENCCEJA Ciências: {{ dados.encceja_ciencias }}</p>
+            <p>ENCCEJA Geografia: {{ dados.encceja_geografia }}</p>
+            <p>ENCCEJA História: {{ dados.encceja_historia }}</p>
+        {% endif %}
+
+        {% if dados.enem_linguagens != 0 and dados.enem_matematica != 0 %}
+            <p>ENEM - Linguagens: {{ dados.enem_linguagens }}</p>
+        {% endif %}
+
+        {% if dados.outros_geografia != 0 and dados.outros_portugues != 0 and dados.outros_matematica != 0 %}
+            <p>Outros - Português: {{ dados.outros_portugues }}</p>
+        {% endif %}
+
+        <p>E que a média que será utilizada para colocação no processo seletivo será: {{ dados.media }}</p>
+
+        <br><br>
+
+        <div class="row">
+            <div class="col s5 center">__________________________________________________</div>
+            <div class="col s2"></div>
+            <div class="col s5 center">__________________________________________________</div>
+        </div>
+
+        <div class="row">
+            <div class="col s5 center">Assinatura do Responsável</div>
+            <div class="col s2"></div>
+            <div class="col s5 center">Assinatura do Candidato</div>
+        </div>
+
+        <hr>
+
+        <p class="center card-panel"><b>Procolo de Inscrição – Processo Seletivo Especial 2019/1 – Campus Avançado São Miguel do Guaporé</b></p>
+        <div class="row">
+            <div class="col s6">Ficha nº {{ dados.id }}</div>
+            <div class="col s6"> Opção de vaga: {{ dados.opcaoinscricao }}</div>
+        </div>
+        <div class="row">
+            <div class="col s6">Nome Candidato: {{ dados.id }}</div>
+            <div class="col s3">Responsável pela Incrição: {{ user.username }}</div>
+            <div class="col s3">____________________________________</div>
+        </div>
+
+
+    </body>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</html>

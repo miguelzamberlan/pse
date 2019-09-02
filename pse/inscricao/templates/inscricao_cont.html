@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load materializecss %}
+
+{% block content %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h3 class="header center orange-text">Formulário Inscrição</h3>
+
+            {%  if erro %}
+                <h5 class="header center red-text">{{ erro }}</h5>
+            {% endif %}
+
+            <div class="row center">
+                <h5 class="header col s12 light">Opção Inscrição: {{ enquadramento }}</h5>
+                <h5 class="header col s12 light">Tipo Nota:
+                    {% if opcao == 1 %}
+                        Histórico Escolar do Ensino Fundamental
+                    {% elif opcao == 2 %}
+                        Certificado de Conclusão via provão ou análogos
+                    {% elif opcao == 3 %}
+                        Certificado de Conclusão via ENCCEJA
+                    {% elif opcao == 4 %}
+                        Nota do ENEM
+                    {% elif opcao == 5 %}
+                        Nota por Conceito
+                    {% endif %}
+                </h5>
+            </div>
+            <form action="{% url 'inscricao:salvar' %}" method="post">
+                {% csrf_token %}
+                <p>
+                    <input type="hidden" name="opcaoinscricao" id="opcaoinscricao" required  value="{{ enquadramento }}">
+                </p>
+                <p>
+                    <input type="hidden" name="opcao" id="opcao" required  value="{{ opcao }}">
+                </p>
+                {{ form|materializecss }}
+
+                <input type="submit" class="btn btn-primary" value="Inserir">
+            </form>
+        </div>
+    </div>
+    <br><br><br><br>
+{% endblock %}

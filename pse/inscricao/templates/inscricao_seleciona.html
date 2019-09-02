@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h3 class="header center orange-text">Formulário Inscrição</h3>
+
+            {%  if erro %}
+                <h5 class="header center red-text">{{ erro }}</h5>
+            {% endif %}
+
+            <form action="{% url 'inscricao:inscricao' %}" method="post">
+                {% csrf_token %}
+                <p>
+                    <label>
+                        <input type="hidden" name="escolapublica" id="id_escolapublica"  {% if escolapublica %} value="True" {% endif %}>
+                        {% if escolapublica %}
+                        <span>O candidato declarou que estudou sempre em Escola Pública! Selecione opção de renda e etnia:</span>
+                        {% endif %}
+                    </label>
+                </p>
+                {% if escolapublica %}
+                <p>
+                    <label>
+                        {{ form.rendainferior }}
+                        <span>Possuí renda per capita inferior a 1,5 salários? </span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        {{ form.ppi }}
+                        <span>Se declara Preto, Pardo ou Indígena? </span>
+                    </label>
+                </p>
+                {% endif %}
+                <p>
+                    <label>
+                        <input type="hidden" name="pcd" id="id_pcd"  {% if pcd %} value="True" {% endif %}>
+                        {% if pcd %}
+                        <span>O Candidato declarou ser Portador de Necessidades Especiais (PCD)?</span>
+                        {% endif %}
+                    </label>
+                </p>
+                <p>
+                    <label>Selecione o tipo de nota que o candidato irá fornecer</label>
+                    <select name="opcao" id="opcao" class="browser-default">
+                      <option value="1">Histórico Escolar do Ensino Fundamental</option>
+                      <option value="2">Certificado de Conclusão via provão ou análogos</option>
+                      <option value="3">Certificado de Conclusão via ENCCEJA</option>
+                      <option value="4">Nota do ENEM</option>
+                      <option value="5">Nota por Conceito</option>
+                    </select>
+                </p>
+                <a href="{% url 'inscricao:inscricao' %}" class="btn btn-secondary">Voltar</a>
+                <input type="submit" class="btn btn-primary" value="Continuar">
+            </form>
+        </div>
+    </div>
+    <br><br><br><br>
+
+{% endblock %}

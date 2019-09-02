@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h3 class="header center orange-text">Formulário Inscrição</h3>
+            <form action="{% url 'inscricao:continuar' %}" method="post">
+                {% csrf_token %}
+                <p>
+                    <label>
+                        {{ form.escolapublica }}
+                        <span>Estudou sempre em Escola Pública?</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        {{ form.pcd }}
+                        <span>Portador de Necessidades Especiais (PCD)?</span>
+                    </label>
+                </p>
+                <input type="submit" class="btn btn-primary" value="Continuar">
+            </form>
+        </div>
+    </div>
+    <br><br><br><br>
+
+{% endblock %}
