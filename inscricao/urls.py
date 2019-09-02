@@ -10,4 +10,5 @@ urlpatterns = [
     path('relatorio/', views.relatorio_inscricao, name='relatorio'),
     path('editar/<int:id>/', views.editar_inscricao, name='editar'),
     path('apagar/<int:id>/', views.apagar_inscricao, name='apagar'),
+    path('gerarpdf/<int:id>/', views.gerarpdf, name='gerarpdf'),
 ]

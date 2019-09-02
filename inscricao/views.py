@@ -260,46 +260,21 @@ def salvar_inscricao(request):
 @login_required
 def ficha_inscricao(request, id):
 
-    import io
-    from django.http import FileResponse
-    from reportlab.pdfgen import canvas
+    dados = get_object_or_404(Inscricao, pk=id)
 
-    # Create a file-like buffer to receive PDF data.
-    buffer = io.BytesIO()
-
-    # a página possui 595.27 de largura e 841.89 de altura no padrão A4)
-
-    # Create the PDF object, using the buffer as its "file."
-    p = canvas.Canvas(buffer)
-    p.setLineWidth(.3)
-    p.setFont('Helvetica', 10)
-
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    p.drawString(70, 750, "INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE RONDÔNIA")
-    p.drawString(150, 730, "CAMPUS AVANÇADO SÃO MIGUEL DO GUAPORÉ")
-    p.drawString(150, 710, "PROCESSO SELETIVO ESPECIAL 2019/2")
-    p.line(80,747,580,747)
+    return render(request, 'ficha_inscricao.html', {
+        'codinscricao': id,
+        'dados': dados
+    })
 
 
-    # Close the PDF object cleanly, and we're done.
-    p.showPage()
-    p.save()
+@login_required
+def gerarpdf(request, id):
+    dados = get_object_or_404(Inscricao, pk=id)
 
-    # FileResponse sets the Content-Disposition header so that browsers
-    # present the option to save the file.
-    #buffer.seek(0)
-    #return FileResponse(buffer, as_attachment=True, filename='fichainscricao.pdf')
-
-    from django.core.files.storage import FileSystemStorage
     from django.http import HttpResponse
     from django.template.loader import render_to_string
-
     from weasyprint import HTML
-
-
-
-    dados = get_object_or_404(Inscricao, pk=id)
 
     html_string = render_to_string('ficha_inscricao.html', {'dados': dados, 'codinscricao': id})
 
@@ -310,21 +285,10 @@ def ficha_inscricao(request, id):
     return response
 
 
-    '''
-    return render(request, 'ficha_inscricao.html', {
-        'codinscricao': id,
-        'dados': dados
-    })
-    '''
-
-
-
 @login_required
 def relatorio_inscricao(request):
 
     termofiltro = request.POST.get('p_filtro', '')
-
-
 
     if termofiltro != '':
         filtro = (Q(nomecandidato__icontains=termofiltro))
