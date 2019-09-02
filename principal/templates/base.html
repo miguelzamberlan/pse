@@ -33,8 +33,14 @@
   </nav>
 
   <ul class="sidenav" id="mobile-demo">
-      <li><a href="sass.html">Inscrição</a></li>
-      <li><a href="badges.html">Relatório</a></li>
+          <li><a href="{% url 'principal:principal' %}">Home</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'inscricao:inscricao' %}">Inscrição</a></li>
+          <li><a href="{% url 'inscricao:relatorio' %}">Relatório</a></li>
+          <li><a href="{% url 'logout' %}">{{ user.username }} (Sair)</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
   </ul>
 
   <div class="container">
