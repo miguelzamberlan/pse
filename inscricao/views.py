@@ -291,13 +291,31 @@ def ficha_inscricao(request, id):
     #buffer.seek(0)
     #return FileResponse(buffer, as_attachment=True, filename='fichainscricao.pdf')
 
+    from django.core.files.storage import FileSystemStorage
+    from django.http import HttpResponse
+    from django.template.loader import render_to_string
+
+    from weasyprint import HTML
+
+
 
     dados = get_object_or_404(Inscricao, pk=id)
 
+    html_string = render_to_string('ficha_inscricao.html', {'dados': dados, 'codinscricao': id})
+
+    pdf_file = HTML(string=html_string).write_pdf()
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="fichainscricao.pdf"'
+
+    return response
+
+
+    '''
     return render(request, 'ficha_inscricao.html', {
         'codinscricao': id,
         'dados': dados
     })
+    '''
 
 
 
