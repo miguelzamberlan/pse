@@ -78,9 +78,18 @@ WSGI_APPLICATION = 'pse.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'miguelzamberla06',
+        'USER': 'miguelzamberla06',
+        'PASSWORD': 'a1b4k9ph',
+        'HOST': 'mysql.miguelzamberlan.com.br',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
+
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
 }
 
 
@@ -127,10 +136,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Para Deploy
-#LOGIN_REDIRECT_URL = '/ggfamiliar/'
-#LOGIN_URL = '/ggfamiliar/accounts/login/'
-#LOGOUT_REDIRECT_URL = '/ggfamiliar/'
+LOGIN_REDIRECT_URL = '/pse/'
+LOGIN_URL = '/pse/accounts/login/'
+LOGOUT_REDIRECT_URL = '/pse/'
 
 # Para Desenvolvimento
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+#LOGIN_REDIRECT_URL = '/'
+#LOGOUT_REDIRECT_URL = '/'
+
