@@ -5,6 +5,12 @@ from .models import Inscricao
 
 class InscricaoHistoricoEscolarForm(ModelForm):
 
+    email = forms.CharField(
+        required=False,
+        label="E-mail",
+        max_length=200,
+    )
+
     class Meta:
         model = Inscricao
 
