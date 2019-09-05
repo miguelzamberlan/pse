@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
+
 @login_required
 def continuar_inscricao(request):
     if (request.method == 'POST'):
@@ -22,7 +23,7 @@ def continuar_inscricao(request):
             'escolapublica': escolapublica,
             'pcd': pcd,
             'form': form,
-        } )
+        })
 
 
 @login_required
@@ -34,7 +35,6 @@ def adicionar_inscricao(request):
         pcd = request.POST.get('pcd')
         ppi = request.POST.get('ppi')
         opcao = int(request.POST.get('opcao'))
-
 
         enquadramento = 'Ampla Concorrência'
         if pcd and not escolapublica and not rendainferior and not ppi:
@@ -88,7 +88,7 @@ def adicionar_inscricao(request):
                 'opcao': opcao,
                 'enquadramento': enquadramento,
                 'form': form,
-            } )
+            })
     else:
         form = IniciaInscricaoForm()
         return render(request, 'inscricao.html', {'form': form})
@@ -163,7 +163,6 @@ def salvar_inscricao(request):
             if (opcao == 2):
                 media = (provao_portugues+provao_matematica+provao_historia+provao_geografia+provao_ciencias) / 5
 
-
             encceja_portugues = float(request.POST.get('encceja_portugues', 0))
             encceja_matematica = float(request.POST.get('encceja_matematica', 0))
             encceja_historia = float(request.POST.get('encceja_historia', 0))
@@ -177,7 +176,6 @@ def salvar_inscricao(request):
             if (opcao == 3):
                 media = (mediaportugues+mediamatematica+mediahistoria+mediageografia+mediaciencias) / 5
 
-
             outros_portugues = float(request.POST.get('outros_portugues', 0))
             outros_matematica = float(request.POST.get('outros_matematica', 0))
             outros_historia = float(request.POST.get('outros_historia', 0))
@@ -186,62 +184,61 @@ def salvar_inscricao(request):
             if (opcao == 5):
                 media = (outros_portugues+outros_matematica+outros_historia+outros_geografia+outros_ciencias) / 5
 
-
             enem_linguagens = float(request.POST.get('enem_linguagens', 0))
             enem_matematica = float(request.POST.get('enem_matematica', 0))
             if (opcao == 4):
                 media = ((enem_linguagens/10) + (enem_matematica/10)) / 2
 
             novoregistro = Inscricao(
-                nomeresponsavel = request.POST.get('nomeresponsavel'),
-                cpfresponsavel = request.POST.get('cpfresponsavel'),
-                nomecandidato = request.POST.get('nomecandidato'),
-                cpfcandidato = request.POST.get('cpfcandidato'),
-                datanascimento = request.POST.get('datanascimento'),
-                endereco = request.POST.get('endereco'),
-                endereco_bairro = request.POST.get('endereco_bairro'),
-                endereco_cidade = request.POST.get('endereco_cidade'),
-                email = request.POST.get('email'),
-                telefone = request.POST.get('telefone'),
-                docidentificacao = request.POST.get('docidentificacao'),
-                docidentificacao_emissor = request.POST.get('docidentificacao_emissor'),
-                nomepai = request.POST.get('nomepai'),
-                nomemae = request.POST.get('nomemae'),
-                opcaoinscricao = request.POST.get('opcaoinscricao'),
-                em_7_portugues = float(request.POST.get('em_7_portugues', 0)),
-                em_8_portugues = float(request.POST.get('em_8_portugues', 0)),
-                em_9_portugues = float(request.POST.get('em_9_portugues', 0)),
-                em_7_matematica = float(request.POST.get('em_7_matematica', 0)),
-                em_8_matematica = float(request.POST.get('em_8_matematica', 0)),
-                em_9_matematica = float(request.POST.get('em_9_matematica', 0)),
-                em_7_historia = float(request.POST.get('em_7_historia', 0)),
-                em_8_historia = float(request.POST.get('em_8_historia', 0)),
-                em_9_historia = float(request.POST.get('em_9_historia', 0)),
-                em_7_geografia = float(request.POST.get('em_7_geografia', 0)),
-                em_8_geografia = float(request.POST.get('em_8_geografia', 0)),
-                em_9_geografia = float(request.POST.get('em_9_geografia', 0)),
-                em_7_ciencias = float(request.POST.get('em_7_ciencias', 0)),
-                em_8_ciencias = float(request.POST.get('em_8_ciencias', 0)),
-                em_9_ciencias = float(request.POST.get('em_9_ciencias', 0)),
-                provao_portugues = float(request.POST.get('provao_portugues', 0)),
-                provao_matematica = float(request.POST.get('provao_matematica', 0)),
-                provao_historia = float(request.POST.get('provao_historia', 0)),
-                provao_geografia = float(request.POST.get('provao_geografia', 0)),
-                provao_ciencias = float(request.POST.get('provao_ciencias', 0)),
-                encceja_portugues = float(request.POST.get('encceja_portugues', 0)),
-                encceja_matematica = float(request.POST.get('encceja_matematica', 0)),
-                encceja_historia = float(request.POST.get('encceja_historia', 0)),
-                encceja_geografia = float(request.POST.get('encceja_geografia', 0)),
-                encceja_ciencias = float(request.POST.get('encceja_ciencias', 0)),
-                outros_portugues = float(request.POST.get('outros_portugues', 0)),
-                outros_matematica = float(request.POST.get('outros_matematica', 0)),
-                outros_historia = float(request.POST.get('outros_historia', 0)),
-                outros_geografia = float(request.POST.get('outros_geografia', 0)),
-                outros_ciencias = float(request.POST.get('outros_ciencias', 0)),
-                enem_linguagens = float(request.POST.get('enem_linguagens', 0)),
-                enem_matematica = float(request.POST.get('enem_matematica', 0)),
-                media = media,
-                usuarioinseriu = request.user,
+                nomeresponsavel=request.POST.get('nomeresponsavel'),
+                cpfresponsavel=request.POST.get('cpfresponsavel'),
+                nomecandidato=request.POST.get('nomecandidato'),
+                cpfcandidato=request.POST.get('cpfcandidato'),
+                datanascimento=request.POST.get('datanascimento'),
+                endereco=request.POST.get('endereco'),
+                endereco_bairro=request.POST.get('endereco_bairro'),
+                endereco_cidade=request.POST.get('endereco_cidade'),
+                email=request.POST.get('email'),
+                telefone=request.POST.get('telefone'),
+                docidentificacao=request.POST.get('docidentificacao'),
+                docidentificacao_emissor=request.POST.get('docidentificacao_emissor'),
+                nomepai=request.POST.get('nomepai'),
+                nomemae=request.POST.get('nomemae'),
+                opcaoinscricao=request.POST.get('opcaoinscricao'),
+                em_7_portugues=float(request.POST.get('em_7_portugues', 0)),
+                em_8_portugues=float(request.POST.get('em_8_portugues', 0)),
+                em_9_portugues=float(request.POST.get('em_9_portugues', 0)),
+                em_7_matematica=float(request.POST.get('em_7_matematica', 0)),
+                em_8_matematica=float(request.POST.get('em_8_matematica', 0)),
+                em_9_matematica=float(request.POST.get('em_9_matematica', 0)),
+                em_7_historia=float(request.POST.get('em_7_historia', 0)),
+                em_8_historia=float(request.POST.get('em_8_historia', 0)),
+                em_9_historia=float(request.POST.get('em_9_historia', 0)),
+                em_7_geografia=float(request.POST.get('em_7_geografia', 0)),
+                em_8_geografia=float(request.POST.get('em_8_geografia', 0)),
+                em_9_geografia=float(request.POST.get('em_9_geografia', 0)),
+                em_7_ciencias=float(request.POST.get('em_7_ciencias', 0)),
+                em_8_ciencias=float(request.POST.get('em_8_ciencias', 0)),
+                em_9_ciencias=float(request.POST.get('em_9_ciencias', 0)),
+                provao_portugues=float(request.POST.get('provao_portugues', 0)),
+                provao_matematica=float(request.POST.get('provao_matematica', 0)),
+                provao_historia=float(request.POST.get('provao_historia', 0)),
+                provao_geografia=float(request.POST.get('provao_geografia', 0)),
+                provao_ciencias=float(request.POST.get('provao_ciencias', 0)),
+                encceja_portugues=float(request.POST.get('encceja_portugues', 0)),
+                encceja_matematica=float(request.POST.get('encceja_matematica', 0)),
+                encceja_historia=float(request.POST.get('encceja_historia', 0)),
+                encceja_geografia=float(request.POST.get('encceja_geografia', 0)),
+                encceja_ciencias=float(request.POST.get('encceja_ciencias', 0)),
+                outros_portugues=float(request.POST.get('outros_portugues', 0)),
+                outros_matematica=float(request.POST.get('outros_matematica', 0)),
+                outros_historia=float(request.POST.get('outros_historia', 0)),
+                outros_geografia=float(request.POST.get('outros_geografia', 0)),
+                outros_ciencias=float(request.POST.get('outros_ciencias', 0)),
+                enem_linguagens=float(request.POST.get('enem_linguagens', 0)),
+                enem_matematica=float(request.POST.get('enem_matematica', 0)),
+                media=media,
+                usuarioinseriu=request.user,
             )
 
             novoregistro.save()
@@ -268,7 +265,6 @@ def ficha_inscricao(request, id):
     })
 
 
-@login_required
 def gerarpdf(request, id):
     dados = get_object_or_404(Inscricao, pk=id)
 
@@ -305,9 +301,11 @@ def relatorio_inscricao(request):
         'registros': lista_inscritos
     })
 
+
 @login_required
 def editar_inscricao(request, id):
     pass
+
 
 @login_required
 def apagar_inscricao(request, id):
