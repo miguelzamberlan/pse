@@ -293,12 +293,14 @@ def relatorio_inscricao(request):
     else:
         lista_inscritos = Inscricao.objects.all()
 
+    totalinscritos = lista_inscritos.count()
     paginator = Paginator(lista_inscritos, 100)
     page = request.GET.get('page', 1)
     lista_inscritos = paginator.get_page(page)
 
     return render(request, 'relatorio_inscricao.html', {
-        'registros': lista_inscritos
+        'registros': lista_inscritos,
+        'totalinscritos': totalinscritos,
     })
 
 
