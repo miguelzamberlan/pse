@@ -303,6 +303,18 @@ def relatorio_inscricao(request):
         'totalinscritos': totalinscritos,
     })
 
+@login_required
+def relatorio_inscricao_cotas(request):
+
+    lista_inscritos = Inscricao.objects.all().order_by('opcaoinscricao', '-media')
+
+    paginator = Paginator(lista_inscritos, 100)
+    page = request.GET.get('page', 1)
+    lista_inscritos = paginator.get_page(page)
+
+    return render(request, 'relatorio_inscricao_cotas.html', {
+        'registros': lista_inscritos,
+    })
 
 @login_required
 def editar_inscricao(request, id):

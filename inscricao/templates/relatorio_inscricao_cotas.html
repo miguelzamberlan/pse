@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load materializecss %}
+
+{% block content %}
+    <div class="section no-pad-bot" id="index-banner">
+
+            {% regroup registros by opcaoinscricao as opcaoinscricaolista %}
+
+	        <h4>Relatório de Inscritos por Cotas</h4>
+
+            {% for opinscricao in opcaoinscricaolista %}
+
+            <h4>{{ opinscricao.grouper }}</h4>
+
+            <table class="responsive-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th width="5%" scope="col">Cod</th>
+                        <th width="20%" scope="col">Nome Candidato</th>
+                        <th width="12%" scope="col">CPF</th>
+                        <th width="13%" scope="col">Data Nascimento</th>
+                        <th width="10%" scope="col">Telefone</th>
+                        <th width="10%" scope="col">Opção</th>
+                        <th width="10%" scope="col">Média</th>
+                        <th width="10%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registro in opinscricao.list %}
+                    <tr class="small" >
+                        <td>{{ registro.id }} </td>
+                        <td>{{ registro.nomecandidato }}</td>
+                        <td>{{ registro.cpfcandidato }}</td>
+                        <td>{{ registro.datanascimento|date:"d/m/Y" }}</td>
+                        <td>{{ registro.telefone }}</td>
+                        <td>{{ registro.opcaoinscricao }}</td>
+                        <td>{{ registro.media }}</td>
+                        <td>
+                            <a class="btn btn-secondary btn-sm" href="{% url 'inscricao:ficha' registro.id %}" >Ficha Inscrição</a>
+                            <!--<a class="btn btn-secondary btn-sm" href="{% url 'inscricao:gerarpdf' registro.id %}" >Ficha PDF</a>-->
+                            <!--<a class="btn btn-secondary btn-sm" href="{% url 'inscricao:editar' registro.id %}" >Editar</a>-->
+                            <!--<a class="waves-effect waves-light btn modal-trigger" onclick="excluir_registro( event );" href="{% url 'inscricao:apagar' registro.id %}">Apagar</a>-->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% endfor %}
+    <br><br>
+					<div class="text-center">
+						<span class="step-links">
+							{% if registros.has_previous %}
+							<a class="btn btn-secondary btn-sm" href="?page={{ registros.previous_page_number }}"><i
+									class="fas fa-arrow-left"></i></a>
+							{% endif %}
+
+							<span class="btn btn-primary btn-sm">
+								{{ registros.number }} de {{ registros.paginator.num_pages }}
+							</span>
+
+							{% if registros.has_next %}
+							<a class="btn btn-secondary btn-sm" href="?page={{ registros.next_page_number }}"><i
+									class="fas fa-arrow-right"></i></a>
+							{% endif %}
+						</span>
+					</div>
+        </div>
+
+        <script type="text/javascript">
+        function excluir_registro( e ){
+            if( !confirm('Deseja realmente excluir este registro?') )
+            {
+                if( window.event)
+                    window.event.returnValue=false;
+                else
+                    e.preventDefault();
+            }
+        }
+
+        </script>
+
+{% endblock %}
