@@ -10,7 +10,7 @@
 						{% csrf_token %}
 
 						<p>
-                            <label>Digite o Nome ou CPF do Candidato</label>
+                          <label>Digite o Nome ou CPF do Candidato</label>
                             <input type="text" name="p_filtro" id="p_filtro" />
                         </p>
 
@@ -39,14 +39,14 @@
 					            <td>{{ registro.cpfcandidato }}</td>
 					            <td>{{ registro.datanascimento }}</td>
 					            <td>{{ registro.telefone }}</td>
-                                <td>{{ registro.opcaoinscricao }}</td>
-                                <td>{{ registro.media }}</td>
-								<td>
-                                    <a class="btn btn-secondary btn-sm" href="{% url 'inscricao:ficha' registro.id %}" >Ficha Inscrição</a>
-                                    <a class="btn btn-secondary btn-sm" href="{% url 'inscricao:gerarpdf' registro.id %}" >Ficha PDF</a>
-									<!--<a class="btn btn-secondary btn-sm" href="{% url 'inscricao:editar' registro.id %}" >Editar</a>-->
-                                    <a class="waves-effect waves-light btn modal-trigger" onclick="excluir_registro( event );" href="{% url 'inscricao:apagar' registro.id %}">Apagar</a>
-								</td>
+                      <td>{{ registro.opcaoinscricao }}</td>
+                      <td>{{ registro.media }}</td>
+                      <td>
+                        <a class="btn btn-secondary btn-sm" href="{% url 'inscricao:ficha' registro.id %}" >Ficha Inscrição</a>
+                        <!--<a class="btn btn-secondary btn-sm" href="{% url 'inscricao:gerarpdf' registro.id %}" >Ficha PDF</a>-->
+                        <!--<a class="btn btn-secondary btn-sm" href="{% url 'inscricao:editar' registro.id %}" >Editar</a>-->
+                        <a class="waves-effect waves-light btn modal-trigger" onclick="excluir_registro( event );" href="{% url 'inscricao:apagar' registro.id %}">Apagar</a>
+                      </td>
 				            </tr>
 				            {% endfor %}
 				        </tbody>
