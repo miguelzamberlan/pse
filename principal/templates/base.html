@@ -15,33 +15,44 @@
 
 </head>
 <body>
-  <nav class="green darken-4">
-    <div class="nav-wrapper container">
-      <a href="#!" class="brand-logo">PSE - IFRO</a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-          <li><a href="{% url 'principal:principal' %}">Home</a></li>
-        {% if user.is_authenticated %}
-          <li><a href="{% url 'inscricao:inscricao' %}">Inscrição</a></li>
-          <li><a href="{% url 'inscricao:relatorio' %}">Relatório</a></li>
-          <li><a href="{% url 'logout' %}">{{ user.username }} (Sair)</a></li>
-        {% else %}
-          <li><a href="{% url 'login' %}">Login</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </nav>
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+      <li><a href="{% url 'inscricao:relatorio' %}">Geral</a></li>
+      <li><a href="{% url 'inscricao:relatoriocotas' %}">Por Cotas</a></li>
+    </ul>
+    <nav class="green darken-4">
+        <div class="nav-wrapper container">
+            <a href="#!" class="brand-logo">PSE - IFRO</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{% url 'principal:principal' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'inscricao:inscricao' %}">Inscrição</a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Relatório<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a href="{% url 'logout' %}">{{ user.username }} (Sair)</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
 
-  <ul class="sidenav" id="mobile-demo">
+  <!-- Navbar Mobile -->
+    <!-- Dropdown Structure -->
+    <ul id="dropdown2" class="dropdown-content">
+      <li><a href="{% url 'inscricao:relatorio' %}">Geral</a></li>
+      <li><a href="#!">Por Cotas</a></li>
+    </ul>
+    <ul class="sidenav" id="mobile-demo">
           <li><a href="{% url 'principal:principal' %}">Home</a></li>
         {% if user.is_authenticated %}
           <li><a href="{% url 'inscricao:inscricao' %}">Inscrição</a></li>
-          <li><a href="{% url 'inscricao:relatorio' %}">Relatório</a></li>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Relatório<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a href="{% url 'logout' %}">{{ user.username }} (Sair)</a></li>
         {% else %}
           <li><a href="{% url 'login' %}">Login</a></li>
         {% endif %}
-  </ul>
+    </ul>
 
   <div class="container">
     {% block content %}
@@ -91,6 +102,9 @@
       $(function(){
 
         $('.sidenav').sidenav();
+
+        $(".dropdown-trigger").dropdown();
+
 
       }); // end of document ready
     })(jQuery); // end of jQuery name space
