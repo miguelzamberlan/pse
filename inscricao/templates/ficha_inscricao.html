@@ -50,7 +50,7 @@
         <table class="dadospessoais">
             <tr>
                 <th>Nome Candidato</th>
-                <td>{{ dados.nomecandidato }}</td>
+                <td>{{ dados.nomecandidato.upper }}</td>
             </tr>
            <tr>
                 <th>CPF Candidato</th>
@@ -62,35 +62,35 @@
             </tr>
            <tr>
                 <th>Endereço Completo</th>
-                <td>{{ dados.endereco }}</td>
+                <td>{{ dados.endereco.upper }}</td>
             </tr>
            <tr>
                 <th>Bairro</th>
-                <td>{{ dados.endereco_bairro }}</td>
+                <td>{{ dados.endereco_bairro.upper }}</td>
             </tr>
            <tr>
                 <th>Cidade / Estado</th>
-                <td>{{ dados.endereco_cidade }} / RO</td>
+                <td>{{ dados.endereco_cidade.upper }} / RO</td>
             </tr>
            <tr>
                 <th>E-mail</th>
-                <td>{{ dados.email }}</td>
+                <td>{{ dados.email.lower }}</td>
             </tr>
            <tr>
                 <th>Documento de Identificação</th>
-                <td>{{ dados.docidentificacao }} - {{ dados.docidentificacao_emissor }}</td>
+                <td>{{ dados.docidentificacao }} - {{ dados.docidentificacao_emissor.upper }}</td>
             </tr>
            <tr>
                 <th>Nome do Pai</th>
-                <td>{{ dados.nomepai }}</td>
+                <td>{{ dados.nomepai.upper }}</td>
             </tr>
            <tr>
                 <th>Nome da Mãe</th>
-                <td>{{ dados.nomemae }}</td>
+                <td>{{ dados.nomemae.upper }}</td>
             </tr>
            <tr>
                 <th>Nome do Responsável</th>
-                <td>{{ dados.nomeresponsavel }}</td>
+                <td>{{ dados.nomeresponsavel.upper }}</td>
             </tr>
            <tr>
                 <th>CPF do Responsável</th>

@@ -6,6 +6,7 @@ from .forms import InscricaoEnccejaForm, InscricaoEnemForm, InscricaoHistoricoEs
 from .models import Inscricao
 from django.db.models import Q
 from django.contrib.auth.models import User
+from validate_docbr import CPF
 
 # Create your views here.
 
@@ -257,11 +258,19 @@ def salvar_inscricao(request):
 @login_required
 def ficha_inscricao(request, id):
 
+    cpf = CPF()
+
     dados = get_object_or_404(Inscricao, pk=id)
+
+    cpfcandidato = cpf.mask(str(dados.cpfcandidato))
+    cpfresponsavel = cpf.mask(str(dados.cpfresponsavel))
+
+    dados.cpfresponsavel = cpfresponsavel
+    dados.cpfcandidato = cpfcandidato
 
     return render(request, 'ficha_inscricao.html', {
         'codinscricao': id,
-        'dados': dados
+        'dados': dados,
     })
 
 

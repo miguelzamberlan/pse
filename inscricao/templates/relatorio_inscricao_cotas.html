@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load materializecss %}
+{% load maskcpf %}
 
 {% block content %}
     <div class="section no-pad-bot" id="index-banner">
@@ -29,8 +30,8 @@
                     {% for registro in opinscricao.list %}
                     <tr class="small" >
                         <td>{{ registro.id }} </td>
-                        <td>{{ registro.nomecandidato }}</td>
-                        <td>{{ registro.cpfcandidato }}</td>
+                        <td>{{ registro.nomecandidato.upper }}</td>
+                        <td>{{ registro.cpfcandidato|maskcpf }}</td>
                         <td>{{ registro.datanascimento|date:"d/m/Y" }}</td>
                         <td>{{ registro.telefone }}</td>
                         <td>{{ registro.opcaoinscricao }}</td>
